@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class MovieController{
@@ -20,12 +21,19 @@ public class MovieController{
     //Task 3.1:
     @GetMapping("/")
     public String index(){
-        return "Hello user - Use This application to search for your movie facts";
+        return "Hello user - Use This application to search for your movie facts <br>" +
+                " Options: <br>" +
+                "/getFirstMovie <br>"+
+                "/getRandomMovie <br>"+
+                "/getTenSortByPopularity <br>"+
+                "/howManyWonAnAward <br>"+
+                "/filter?char=a&amount=1  (insert character (char) and amount of times (amount) <br>"+
+                "/longest?g1=Drama&g2=Comedy (insert two genres to compare which one has a longer average length) <br>";
     }
 
     //Task 3.2:
     @GetMapping("/getFirstMovie")
-    public String getFirst() throws FileNotFoundException{
+    public String getFirst(){
         return movieService.getFirstMovie();
     }
 
@@ -38,13 +46,13 @@ public class MovieController{
 
     //Task 3.4:
     @GetMapping("/getTenSortByPopularity")
-    public String getTenSortByPopularity() throws FileNotFoundException{
+    public String getTenSortByPopularity(){
         return movieService.getTenSortByPopularity();
     }
 
     //Task 3.5:
     @GetMapping("/howManyWonAnAward")
-    public int howManyWonAnAward() throws FileNotFoundException{
+    public String howManyWonAnAward(){
         return movieService.HowManyWonAnAward();
     }
 
@@ -62,8 +70,7 @@ public class MovieController{
     //Task 3.7: - Amanda
     // Eksempel: http://localhost:8080/longest?g1=Drama&g2=Comedy
     @GetMapping("/longest")
-    public String compareGenreLength(@RequestParam("g1") String g1, @RequestParam("g2") String g2)
-            throws FileNotFoundException{
+    public String compareGenreLength(@RequestParam("g1") String g1, @RequestParam("g2") String g2){
         return movieService.compareGenreLength(g1, g2);
     }
 

@@ -4,10 +4,7 @@ import com.example.movieworkshoptemplate.repositories.Movie;
 import com.example.movieworkshoptemplate.repositories.ReadFile;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.HashSet;
+import java.util.*;
 
 public class MovieService {
     //Services called from controllers that returns what the client requests
@@ -18,7 +15,7 @@ public class MovieService {
     }
 
     /*GetFirst, finding first movie and display title*/
-    public String getFirstMovie() throws FileNotFoundException{
+    public String getFirstMovie(){
         ArrayList <Movie> mList = moviesList;
         return  "The first movie on the list is: " + mList.get(0).getTitle();
 
@@ -26,7 +23,7 @@ public class MovieService {
 
     /*This end-point calls a service,  that finds a single random movie from the list and displays the
     title */
-    public String getRandomMovie() throws FileNotFoundException{
+    public String getRandomMovie(){
         //pick random movie
 
         //Movie randomMovie = moviesList.random(0 - moviesList.size)
@@ -42,7 +39,7 @@ public class MovieService {
         (Hint: Remember the comparable interface).
      */
 
-    public String getTenSortByPopularity() throws FileNotFoundException{
+    public String getTenSortByPopularity(){
 
         HashSet<Movie> tenRandomMovies = new HashSet<>();
 
@@ -73,22 +70,19 @@ public class MovieService {
     3.5  /howManyWonAnAward This  end-point  prints  how  many  of
     the  movies  of  the  data-set  that  won  an award.
     */
-    public int HowManyWonAnAward() throws FileNotFoundException {
+    public String HowManyWonAnAward(){
         int amountOfMoviesWithAwards = 0;
+        String finalString = "";
         for(Movie movie : moviesList){
+            String title = movie.getTitle();
             if(movie.isAwards().equals("Yes")){
                 amountOfMoviesWithAwards++;
+                finalString += title + "<br>";
             }
         }
-        return amountOfMoviesWithAwards;
+        return amountOfMoviesWithAwards + " movies has won an award" + "<br>" + finalString;
     }
 
-    //3.6 (Advanced)
-    // /filter?char=’x’amount=’n’This end points calls a service that prints all movies,
-    // but only if they contain x character n amount of times
-    public ArrayList <Movie> listOfMoviesWithXName(){
-        return listOfMoviesWithXName();
-    }
 
     /*
     3.6 (Advanced) /filter?char=’x’amount=’n’ - Amanda
