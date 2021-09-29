@@ -48,9 +48,9 @@ public class MovieController{
         return movieService.HowManyWonAnAward();
     }
 
-    //Task 3.8:
-    @GetMapping("/writeSQLMovieDB")
+    //Task 3.8: Commented out because not working
+    /*@GetMapping("/writeSQLMovieDB")
     public int writeSQLMovieDB() throws FileNotFoundException, SQLException {
         return movieService.writeSQLMovieDB();
-    }
+    }*/
 }

@@ -18,6 +18,8 @@ public class MovieService {
     ReadFile reader = new ReadFile();
     ArrayList<Movie> moviesList = reader.fileReader();
 
+
+
     public MovieService() throws FileNotFoundException {
     }
 
@@ -39,7 +41,7 @@ public class MovieService {
     }
 
     /*
-    3.4 /getTenSortByPopularity - Amanda
+    3.4 /getTenSortByPopularity
         This end-point calls a service that fetches 10 random movies, maps each result to a Movie model class, adds to a
         Movie Arraylist and prints the result to the browser - sorted in ascending order by popularity
         (Hint: Remember the comparable interface).
@@ -99,18 +101,11 @@ public class MovieService {
         //Get DB connection
         final String URL = "jdbc:mysql://localhost:3306/movies";//evt. ?serverTimezone=UTC (el. hvilken tidszone man nu bruger)
         Connection connection = null;
-        boolean res = false;
-        // load and register JDBC driver for MySQL
         try {
             connection = DriverManager.getConnection(URL, "Christian", "baldur03");
-            //connection = DBManager.getConnection();
-            System.out.println("So far so good");
-            System.out.println(connection);
         } catch (SQLException ioerr) {
             System.out.println("Vi fik IKKE forbindelse err=" + ioerr);
         }
-        System.out.println(res);
-
         //Insert into DB
         String insertStr = "INSERT INTO movies(Year, length, title, subject, popularity, awards) values (?, ?, ?, ?, ?, ?), ON DUPLICATE KEY UPDATE *";
         PreparedStatement preparedStatement;
@@ -132,15 +127,11 @@ public class MovieService {
             }
         }
         System.out.println("Færdig med at skrive feed");
-        return rowcount;
+        return rowcount; //TODO: Fix up null pointer exception
     }
-
-    public int countMovies(){
-        int count = 0;
+        //SQL syntax task 3.8
         //Select statement syntax =
-            //SELECT DISTINCT
-            //COUNT(DISTINCT IF(genre = 'comedy', awards = Yes)
-            //FROM movies;
-        return count;
-    }
+            //SELECT title
+            //FROM movies
+            //WHERE genre = 'comedy', awards = Yes;
 }
